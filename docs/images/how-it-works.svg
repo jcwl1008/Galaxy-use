@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1040" viewBox="0 0 1600 1040" role="img" aria-labelledby="title desc">
-<title id="title">GalaxyMCP+ESP32S3: see with ADB, act with Bluetooth</title>
+<title id="title">Galaxy Use: see with ADB, act with Bluetooth</title>
 <desc id="desc">Concept diagram. A PC runs OpenCode and an MCP bridge. It receives screenshots from Android through read-only USB ADB. The AI chooses actions, the PC sends serial commands to ESP32-S3, and the board sends Bluetooth HID mouse reports to the phone.</desc>
 <defs>
  <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#071528"/><stop offset="1" stop-color="#102c42"/></linearGradient>
@@ -10,8 +10,8 @@
 <rect width="1600" height="1040" rx="32" fill="url(#bg)"/>
 <g font-family="DejaVu Sans,Arial,sans-serif">
  <rect x="70" y="56" width="190" height="36" rx="18" fill="#173950"/><text x="165" y="80" text-anchor="middle" fill="#89d9fc" font-size="17" font-weight="bold">ANDROID × AI × BLE</text>
- <text x="70" y="160" fill="#fff" font-size="68" font-weight="bold">GalaxyMCP<tspan fill="#78ccff">+</tspan>ESP32S3</text>
- <text x="73" y="207" fill="#b7cbdb" font-size="28">See the screen. Decide with AI. Act through a Bluetooth mouse.</text>
+ <text x="70" y="160" fill="#fff" font-size="76" font-weight="bold">Galaxy <tspan fill="#78ccff">Use</tspan></text>
+ <text x="73" y="207" fill="#b7cbdb" font-size="28">Computer use, but for your Galaxy. Screenshots in. Bluetooth actions out.</text>
  <rect x="70" y="260" width="620" height="482" rx="28" fill="#12283d" stroke="#3e5970" stroke-width="2"/>
  <text x="106" y="309" fill="#f5fbff" font-size="26" font-weight="bold">YOUR PC</text>
  <rect x="105" y="337" width="550" height="145" rx="18" fill="#1c3e5e"/>

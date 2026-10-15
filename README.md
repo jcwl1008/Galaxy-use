@@ -1,11 +1,11 @@
-# GalaxyMCP+ESP32S3
+# Galaxy Use
 
 [繁體中文](#traditional-chinese) · [English](#english)
 
-**讓 OpenCode 看懂 Android 畫面，再經 ESP32-S3 藍牙滑鼠操作手機。**  
-**Let OpenCode observe your Android screen and operate a Bluetooth mouse through an ESP32-S3.**
+**讓 AI 使用你真正的 Galaxy 手機。讀取畫面，再以藍牙滑鼠操作。**  
+**Computer-use-style control for your real Galaxy phone. Screenshots in. Bluetooth actions out.**
 
-![GalaxyMCP+ESP32S3 architecture: screenshots travel from Android to OpenCode through read-only ADB; mouse commands travel from the PC through ESP32-S3 to the phone over Bluetooth.](docs/images/how-it-works.png)
+![Galaxy Use: screenshots travel from Android to OpenCode through read-only ADB; mouse commands travel from the PC through ESP32-S3 to the phone over Bluetooth.](docs/images/how-it-works.png)
 
 **Beta · Windows 10/11 · Android · ESP32-S3 · OpenCode · OpenRouter or a compatible local model**
 
@@ -15,11 +15,15 @@
 
 ### 這個專案是甚麼？
 
-GalaxyMCP+ESP32S3 是連接 **AI 助理與 Android 手機**的本機橋接程式。你在 OpenCode 輸入指令，AI 經 MCP 取得手機畫面，再透過 ESP32-S3 的藍牙 HID 滑鼠功能移動、點擊或捲動。
+**Computer Use，換成你手上的 Galaxy。** Galaxy Use 是連接 AI 助理與真實 Samsung Galaxy／Android 手機的開源本機橋接程式。你在 OpenCode 輸入指令，AI 經 MCP 取得手機畫面，再透過 ESP32-S3 的藍牙 HID 滑鼠功能移動、點擊或捲動。
+
+核心不是模擬器，而是你已解鎖、已授權的實體手機；畫面觀察與輸入控制走兩條獨立路線。預設以 ADB 唯讀擷取畫面，以 ESP32-S3 發送藍牙滑鼠輸入。
 
 **例如：**「描述目前畫面」、「向下捲動一次，再告訴我有甚麼新內容」，或「向右移動滑鼠一次」。開啟 App 或選擇按鈕需要可靠的指標位置及結果驗證，並非輸入名稱就能保證精準點擊。
 
 專案本身不包含 AI 模型；需要 OpenCode 和支援圖片及工具呼叫的模型。預設流程不需要在手機安裝輔助 App。
+
+> 專案原名 GalaxyMCP+ESP32S3，現更名為 Galaxy Use。為保持現有安裝相容，MCP 名稱仍是 `galaxy_phone`，藍牙裝置及輔助 App 名稱亦暫時保留。這次是 repo 品牌及說明更新，不代表新增控制能力。
 
 ### 可以做甚麼？
 
@@ -127,6 +131,21 @@ GalaxyMCP+ESP32S3 是連接 **AI 助理與 Android 手機**的本機橋接程式
 
 [韌體說明](docs/FIRMWARE.md) · [完整 App 指引](README_TC.md) · [安全及資料處理](SECURITY.md) · [MIT License](LICENSE)
 
+### Computer Use / iPhone Use 與 Galaxy Use
+
+Galaxy Use 採用同一類「觀察 → 決策 → 操作 → 驗證」的 agent-use 定位，將焦點放在 Windows、Galaxy／Android 實體手機及 ESP32-S3 藍牙控制。以下是相關開源專案，方便比較不同平台的設計：
+
+| 專案 | 主要方向 |
+|---|---|
+| [open-computer-use](https://github.com/e2b-dev/open-computer-use) | 在 E2B 桌面沙盒內使用 AI 操作電腦 |
+| [iphone-use — leeguooooo](https://github.com/leeguooooo/iphone-use) | macOS 上的實體 iPhone 操作，提供 MCP 等介面 |
+| [iphone-use — xhoantran](https://github.com/xhoantran/iphone-use) | 從 Mac 經 USB 讀取 iPhone 畫面、經藍牙輸入 |
+| **Galaxy Use（本專案）** | Windows + Galaxy／Android；預設 ADB 唯讀觀察 + ESP32-S3 相對 BLE 滑鼠 |
+
+這些是相關專案連結，並非已整合的依賴。Galaxy Use 沒有移植它們的程式碼，也不宣稱具備相同的串流、鍵盤或精準座標點擊能力。若日後重用程式碼，需另行遵守來源授權並保留標示。
+
+本專案為獨立社群專案，並非 Samsung、OpenAI 或上述專案的官方產品或合作版本。
+
 ---
 
 <a id="english"></a>
@@ -137,9 +156,13 @@ GalaxyMCP+ESP32S3 是連接 **AI 助理與 Android 手機**的本機橋接程式
 
 ### What is this project?
 
-**GalaxyMCP+ESP32S3 connects an AI assistant to an Android phone through a local MCP bridge.** You give instructions in OpenCode. A compatible model observes the phone's screenshot and chooses tools; an ESP32-S3 acts as a Bluetooth HID mouse to move, click or scroll.
+**Computer use, but for the Galaxy in your hand.** Galaxy Use is an open-source local bridge that lets an AI assistant observe and interact with a real Samsung Galaxy / Android phone. You give instructions in OpenCode. A compatible model observes the phone's screenshot and chooses tools; an ESP32-S3 acts as a Bluetooth HID mouse to move, click or scroll.
+
+The target is your unlocked, explicitly authorized physical phone, not an emulator. Observation and input use separate paths: read-only ADB for screenshots, and ESP32-S3 BLE HID for mouse input.
 
 The AI model runs through your chosen provider, such as OpenRouter or a compatible local service. **No AI model is included.** The default workflow does not require an Android companion app.
+
+> Formerly GalaxyMCP+ESP32S3. The MCP server remains `galaxy_phone`, and existing Bluetooth / companion App names remain unchanged for compatibility. This is a repository branding and documentation update, not a new control capability.
 
 ### What can it do?
 
@@ -266,3 +289,18 @@ Do not commit private settings, pairing tokens, API keys, device identifiers, sc
 Tests cover MCP stdio, screenshot compression, coordinate mapping, serial state handling, optional companion communication and pairing, and read-only command restrictions. Mock hardware tests do not replace testing on the actual phone and board.
 
 [Development-signed APK](GalaxyPhoneBridge.apk) · [Firmware guide](docs/FIRMWARE.md) · [Android source](android/) · [Security](SECURITY.md) · [MIT License](LICENSE)
+
+### Computer Use / iPhone Use / Galaxy Use
+
+Galaxy Use follows the same broad observe → decide → act → verify approach, with a focus on Windows, real Galaxy / Android phones and an external ESP32-S3 Bluetooth controller. Related open-source projects illustrate different platform choices:
+
+| Project | Focus |
+|---|---|
+| [open-computer-use](https://github.com/e2b-dev/open-computer-use) | AI interaction with a desktop in an E2B sandbox |
+| [iphone-use — leeguooooo](https://github.com/leeguooooo/iphone-use) | Real iPhone control on macOS, including MCP access |
+| [iphone-use — xhoantran](https://github.com/xhoantran/iphone-use) | Mac-based USB screen capture and Bluetooth input for iPhone |
+| **Galaxy Use (this project)** | Windows + Galaxy / Android; read-only ADB observation and ESP32-S3 relative BLE mouse input by default |
+
+These are related-project references, not integrated dependencies. Galaxy Use has not imported their code and does not claim their streaming, keyboard or precise coordinate-control capabilities. Any future code reuse must respect the upstream license and attribution requirements.
+
+Galaxy Use is an independent community project, not an official Samsung or OpenAI product, and is not affiliated with the projects linked above.

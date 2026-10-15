@@ -1,4 +1,4 @@
-# GalaxyMCP+ESP32S3 agent instructions
+# Galaxy Use agent instructions
 
 Respond concisely in Hong Kong Traditional Chinese unless the user asks otherwise.
 

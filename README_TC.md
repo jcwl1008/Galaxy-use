@@ -1,6 +1,6 @@
 > 公開版 v3.1 預設為 ADB 唯讀，以下是需要明確授權的可選 App 模式。公司只批准 ADB 讀取時，請使用 README.md 的截圖＋ESP32 流程，不執行下列安裝／配對。管理員批准後才可使用非唯讀設定；本套件不改變公司政策。
 
-# Galaxy Phone MCP v3 — USB Accessibility 輔助 App
+# Galaxy Use — USB Accessibility 輔助 App（可選模式）
 
 適用：Windows、OpenCode + OpenRouter、已授權 USB 偵錯的 S26 Ultra。ESP32 韌體及藍牙連線毋須更改。
 
