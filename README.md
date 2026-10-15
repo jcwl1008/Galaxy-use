@@ -1,13 +1,27 @@
 # GalaxyMCP+ESP32S3
 
+[繁體中文](#traditional-chinese) · [English](#english)
+
 **讓 OpenCode 看懂 Android 畫面，再經 ESP32-S3 藍牙滑鼠操作手機。**  
-Android observations through MCP. Physical BLE mouse input through ESP32-S3.
+**Let OpenCode observe your Android screen and operate a Bluetooth mouse through an ESP32-S3.**
 
 ![GalaxyMCP+ESP32S3 architecture: screenshots travel from Android to OpenCode through read-only ADB; mouse commands travel from the PC through ESP32-S3 to the phone over Bluetooth.](docs/images/how-it-works.png)
 
 **Beta · Windows 10/11 · Android · ESP32-S3 · OpenCode · OpenRouter or a compatible local model**
 
-## 可以做甚麼？
+<a id="traditional-chinese"></a>
+
+## 繁體中文
+
+### 這個專案是甚麼？
+
+GalaxyMCP+ESP32S3 是連接 **AI 助理與 Android 手機**的本機橋接程式。你在 OpenCode 輸入指令，AI 經 MCP 取得手機畫面，再透過 ESP32-S3 的藍牙 HID 滑鼠功能移動、點擊或捲動。
+
+**例如：**「描述目前畫面」、「向下捲動一次，再告訴我有甚麼新內容」，或「向右移動滑鼠一次」。開啟 App 或選擇按鈕需要可靠的指標位置及結果驗證，並非輸入名稱就能保證精準點擊。
+
+專案本身不包含 AI 模型；需要 OpenCode 和支援圖片及工具呼叫的模型。預設流程不需要在手機安裝輔助 App。
+
+### 可以做甚麼？
 
 - 讀取手機截圖，交由你選用的 AI 模型理解畫面。
 - 經 USB 串口向 ESP32-S3 發出指令，由 BLE HID 滑鼠移動、點擊及捲動。
@@ -18,6 +32,15 @@ Android observations through MCP. Physical BLE mouse input through ESP32-S3.
 
 **目前可行的核心流程：** 觀察截圖 → AI 判斷 → ESP32 相對移動／點擊 → 新觀察確認。
 這不是手機畫面串流或即時視覺模型，也不保證每個 App 都能自動操作。
+
+### 適合哪些用途？
+
+| 用途 | 如何使用 |
+|---|---|
+| 畫面解讀 | 擷取目前介面，請 AI 描述可見內容 |
+| 輔助導覽 | 透過 ESP32 移動、點擊及捲動，再觀察結果 |
+| 示範與學習 | 展示「手機畫面 → AI 判斷 → 藍牙輸入」的完整流程 |
+| 開發與測速 | 使用 MCP 工具及耗時資料，研究不同模型和截圖設定 |
 
 ## 你需要
 
@@ -104,6 +127,142 @@ Android observations through MCP. Physical BLE mouse input through ESP32-S3.
 
 [韌體說明](docs/FIRMWARE.md) · [完整 App 指引](README_TC.md) · [安全及資料處理](SECURITY.md) · [MIT License](LICENSE)
 
-## English overview
+---
 
-GalaxyMCP+ESP32S3 is a local MCP bridge for OpenCode. Android screenshots are observed over authorized read-only ADB; input travels over USB serial to an ESP32-S3 BLE HID mouse. The model may run through OpenRouter or a compatible local provider. The default configuration blocks ADB writes, UI dumps, installation, pairing and ADB input. An optional Android Accessibility companion is included for expressly authorized environments. It is a beta integration, not a real-time vision stream, absolute-position BLE controller or enterprise-policy workaround.
+<a id="english"></a>
+
+## English
+
+[Back to 繁體中文](#traditional-chinese)
+
+### What is this project?
+
+**GalaxyMCP+ESP32S3 connects an AI assistant to an Android phone through a local MCP bridge.** You give instructions in OpenCode. A compatible model observes the phone's screenshot and chooses tools; an ESP32-S3 acts as a Bluetooth HID mouse to move, click or scroll.
+
+The AI model runs through your chosen provider, such as OpenRouter or a compatible local service. **No AI model is included.** The default workflow does not require an Android companion app.
+
+### What can it do?
+
+| Capability | How it works |
+|---|---|
+| Describe the phone screen | Capture a screenshot over authorized read-only USB ADB and send it to your selected vision model |
+| Move, click and scroll | Send serial commands from the PC to the ESP32-S3, which forwards BLE HID mouse reports to the phone |
+| Use natural-language instructions | OpenCode interprets your request and calls the bridge's MCP tools |
+| Reduce image transfer size | Return a JPEG with a default maximum edge of 1280 pixels and quality 65 |
+| Inspect connection health | Report the phone connection, serial ports, BLE link, encryption, subscriptions and readiness |
+| Measure capture overhead | Return `capture_ms`, `total_ms` and `returned_bytes` to help diagnose latency |
+| Explore optional UI automation | An Accessibility companion and ADB input tools are included for separately authorized environments; they are disabled by default |
+
+Examples of requests:
+
+> Describe what is currently visible on my phone. Do not click anything.
+
+> Scroll down once through the ESP32 mouse, then inspect the updated screen.
+
+> Move the Bluetooth mouse to the right once. Do not click.
+
+Opening apps or selecting a particular button requires reliable pointer positioning and verification. **The ESP32 mouse is relative input, not an absolute-coordinate tap controller.** A named target is not a guarantee of a precise click.
+
+### Useful for
+
+- **Screen interpretation:** ask the model to explain visible UI content.
+- **Assisted navigation:** move, click or scroll through explicitly requested steps and check the result.
+- **Demos and learning:** demonstrate the observation → AI decision → Bluetooth input loop.
+- **Development experiments:** compare capture settings, model responses and tool overhead.
+
+### How it works
+
+1. **Observe:** Android → USB ADB screenshot → local MCP bridge → OpenCode/model.
+2. **Decide:** the model interprets the screenshot and chooses a permitted action.
+3. **Act:** PC → USB serial → ESP32-S3 → BLE HID mouse → Android.
+4. **Verify:** capture a new observation when needed to confirm the outcome.
+
+The illustration at the top shows these two separate paths. It is a conceptual diagram, not a live phone screenshot. This project does not stream every frame to the model.
+
+### Requirements
+
+| Component | Requirement |
+|---|---|
+| PC | Windows, Python 3.10+, OpenCode and Android platform-tools |
+| Phone | An unlocked Android device with manually authorized USB debugging |
+| Board | ESP32-S3; the firmware targets the known DNESP32S3B N16R8 configuration |
+| Model | Image input and tool calling; confirm both capabilities with your provider |
+| Connections | Phone USB → PC; board UART USB → PC; phone paired to the board over BLE |
+
+A compatible local model service can replace a cloud provider, but speed depends on your hardware. The MCP bridge does not store model API keys.
+
+### Quick start
+
+**1. Set up the PC**
+
+1. On GitHub, choose **Code → Download ZIP** and extract the project to a permanent folder.
+2. Install Python, OpenCode and Android platform-tools.
+3. Run `SETUP.cmd`. It searches for `adb.exe`; if it cannot find it, provide the full path.
+4. Connect the phone and board. Unlock the phone and manually authorize USB debugging.
+5. Close Arduino Serial Monitor so the bridge can open the board's serial port. The default is COM4; set your actual port in your private `bridge.json`.
+6. Run `START_OpenCode.cmd`, or open the project folder in OpenCode Desktop. Configure a model that supports images and tool calls.
+
+Setup creates an isolated `.venv`, a private `bridge.json` and project-local `opencode.json`. Existing OpenCode configuration is backed up and other provider/MCP entries are preserved. Keep generated private settings out of Git.
+
+**2. Prepare the ESP32-S3**
+
+The sketch is [`firmware/GalaxyMouse/GalaxyMouse.ino`](firmware/GalaxyMouse/GalaxyMouse.ino). Follow the [firmware guide](docs/FIRMWARE.md), including the specified Arduino-ESP32 version and board settings. Back up the original factory firmware before replacing it.
+
+If the board already runs **Jimmy Phone Mouse v2** and works, there is no need to flash it again. Pair it manually in the phone's Bluetooth settings, then confirm `ready=true` with `esp32_status`.
+
+**3. Paste this into OpenCode**
+
+> Use the galaxy_phone MCP server. First call connection_info and confirm adb_read_only=true, then call esp32_status. Use phone_screenshot(max_side=1280, quality=65) to describe the current screen and report capture_ms, total_ms and returned_bytes. Do not click yet. For subsequent input, use only the ESP32 BLE mouse. Do not run installation, pairing, UI dumps or ADB input. Take a new observation only when needed to verify an action.
+
+Start with one mouse movement before testing a click. Do not infer a pointer position that the screenshot does not show.
+
+### Tools and default behavior
+
+| Tool | Default mode |
+|---|---|
+| `connection_info` | List ports, the phone connection and bridge version |
+| `esp32_status` | Read BLE, encryption, subscription and readiness state |
+| `esp32_mouse` | Send `left`, `right`, `up`, `down`, `click`, `scrollup` or `scrolldown` |
+| `phone_screenshot` | Return compressed JPEG; `full_resolution=true` returns the original PNG |
+| `phone_ui` / `phone_click_*` | Disabled; require an authorized non-read-only configuration |
+| `adb_tap` / `adb_swipe` / `adb_key` / `adb_type_ascii` | Disabled |
+| `phone_app_status` | Report that the optional App route is unavailable in read-only mode |
+
+With `adb_read_only=true`, the bridge checks ADB commands before execution. Only device listing, screenshot capture and the specific display-size/orientation queries used by the bridge are permitted. This gate takes precedence over `adb_actions`.
+
+This does not change or replace an organization's endpoint policies. Use only the commands and BLE control your organization permits.
+
+### Optional Accessibility companion
+
+The default screenshot + ESP32 workflow **does not need an APK, App pairing or Accessibility permission**.
+
+[`GalaxyPhoneBridge.apk`](GalaxyPhoneBridge.apk) and its [Android source](android/) are included for expressly authorized environments. The companion can read accessible UI nodes and perform semantic clicks, with stale-element checks. It requires ADB forwarding and a pairing token written to App-private storage. Installing the APK manually is not the same as pairing it.
+
+Installation and pairing scripts are blocked by the default read-only configuration. On managed workstations, obtain administrator authorization before using optional modes. Do not use another transport to evade restrictions. The [detailed companion guide](README_TC.md) is currently in Traditional Chinese; [Android build notes](android/BUILD.md) are in English.
+
+### Performance and limitations
+
+- JPEG compression reduces the image sent to the model. The phone still generates the original PNG; capture time is not eliminated.
+- Model inference, provider queues and network delay remain. Capture metrics do not include those delays.
+- Each directional movement is **40 HID units, not 40 screen pixels**. Android pointer acceleration affects the distance.
+- Screenshots may omit the hardware cursor. A BLE acknowledgement does not prove a visible action succeeded.
+- Request full-resolution images only when small text or details require them; avoid duplicate observations.
+- BLE keyboard input, Chinese typing, scrcpy streaming and OCR are not included.
+- Games, custom-drawn screens, some WebViews and protected content may not expose usable Accessibility nodes.
+- The APK is development-signed and its signature was checked. Not every Android/One UI version has been tested on hardware.
+
+### Privacy and responsible use
+
+Screenshots and optional UI text are sent through OpenCode to the model provider you choose. The Android companion itself has no Internet permission. The bridge does not automatically save observation history, but your client/provider may have its own logging policy.
+
+Do not commit private settings, pairing tokens, API keys, device identifiers, screenshots or factory backups. Let the device owner handle passwords, PINs and biometric prompts. Sending messages, purchases and deletion require explicit authorization.
+
+### Development
+
+```powershell
+.venv\Scripts\python.exe -m unittest discover -p "test_*.py"
+```
+
+Tests cover MCP stdio, screenshot compression, coordinate mapping, serial state handling, optional companion communication and pairing, and read-only command restrictions. Mock hardware tests do not replace testing on the actual phone and board.
+
+[Development-signed APK](GalaxyPhoneBridge.apk) · [Firmware guide](docs/FIRMWARE.md) · [Android source](android/) · [Security](SECURITY.md) · [MIT License](LICENSE)
