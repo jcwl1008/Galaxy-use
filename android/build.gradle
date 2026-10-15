@@ -1,0 +1,14 @@
+plugins { id 'com.android.application' version '8.7.3' }
+android {
+ namespace 'hk.jimmy.galaxybridge'
+ compileSdk 35
+ defaultConfig {
+  applicationId 'hk.jimmy.galaxybridge'
+  minSdk 26
+  targetSdk 35
+  versionCode 3
+  versionName '3.0'
+ }
+ sourceSets { main { manifest.srcFile 'AndroidManifest.xml'; java.srcDirs = ['src']; res.srcDirs = ['res'] } }
+ compileOptions { sourceCompatibility JavaVersion.VERSION_1_8; targetCompatibility JavaVersion.VERSION_1_8 }
+}

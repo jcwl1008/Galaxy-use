@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1040" viewBox="0 0 1600 1040" role="img" aria-labelledby="title desc">
+<title id="title">GalaxyMCP+ESP32S3: see with ADB, act with Bluetooth</title>
+<desc id="desc">Concept diagram. A PC runs OpenCode and an MCP bridge. It receives screenshots from Android through read-only USB ADB. The AI chooses actions, the PC sends serial commands to ESP32-S3, and the board sends Bluetooth HID mouse reports to the phone.</desc>
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#071528"/><stop offset="1" stop-color="#102c42"/></linearGradient>
+ <linearGradient id="blue" x2="1" y2="1"><stop stop-color="#52c8ff"/><stop offset="1" stop-color="#5578ff"/></linearGradient>
+ <marker id="ab" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0 0L10 6L0 12" fill="none" stroke="#61c5ff" stroke-width="2"/></marker>
+ <marker id="ag" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0 0L10 6L0 12" fill="none" stroke="#83f2c3" stroke-width="2"/></marker>
+</defs>
+<rect width="1600" height="1040" rx="32" fill="url(#bg)"/>
+<g font-family="DejaVu Sans,Arial,sans-serif">
+ <rect x="70" y="56" width="190" height="36" rx="18" fill="#173950"/><text x="165" y="80" text-anchor="middle" fill="#89d9fc" font-size="17" font-weight="bold">ANDROID × AI × BLE</text>
+ <text x="70" y="160" fill="#fff" font-size="68" font-weight="bold">GalaxyMCP<tspan fill="#78ccff">+</tspan>ESP32S3</text>
+ <text x="73" y="207" fill="#b7cbdb" font-size="28">See the screen. Decide with AI. Act through a Bluetooth mouse.</text>
+ <rect x="70" y="260" width="620" height="482" rx="28" fill="#12283d" stroke="#3e5970" stroke-width="2"/>
+ <text x="106" y="309" fill="#f5fbff" font-size="26" font-weight="bold">YOUR PC</text>
+ <rect x="105" y="337" width="550" height="145" rx="18" fill="#1c3e5e"/>
+ <circle cx="141" cy="374" r="8" fill="#7ef0c4"/><text x="164" y="383" fill="#fff" font-size="27" font-weight="bold">OpenCode + AI model</text>
+ <text x="134" y="428" fill="#c5d7e8" font-size="22">OpenRouter or a compatible local model</text>
+ <text x="134" y="458" fill="#95bad6" font-size="18">Understands screenshots and selects tools</text>
+ <path d="M380 488V523" stroke="#829caf" stroke-width="3"/>
+ <rect x="105" y="531" width="550" height="161" rx="18" fill="#102133" stroke="#538db0" stroke-width="2"/>
+ <text x="134" y="575" fill="#fff" font-size="28" font-weight="bold">galaxy_phone MCP</text>
+ <text x="134" y="615" fill="#a5dfff" font-size="22">Observe: compressed screenshots</text>
+ <text x="134" y="653" fill="#a0f2d2" font-size="22">Control: serial mouse commands</text>
+ <path d="M70 757H690L725 784H35Z" fill="#24435e"/>
+ <rect x="299" y="758" width="160" height="9" rx="4" fill="#46657c"/>
+ <rect x="1120" y="269" width="356" height="579" rx="44" fill="#06101c" stroke="#5e829e" stroke-width="4"/>
+ <rect x="1137" y="289" width="322" height="536" rx="30" fill="#eaf1f7"/>
+ <rect x="1244" y="300" width="107" height="16" rx="8" fill="#071528"/>
+ <text x="1298" y="365" text-anchor="middle" fill="#14334d" font-size="26" font-weight="bold">ANDROID PHONE</text>
+ <text x="1298" y="399" text-anchor="middle" fill="#567184" font-size="18">Illustrated screen</text>
+ <rect x="1163" y="429" width="271" height="72" rx="16" fill="#fff"/><circle cx="1195" cy="465" r="15" fill="#6485ff"/><text x="1224" y="472" fill="#213f58" font-size="21">Settings</text>
+ <rect x="1163" y="517" width="271" height="72" rx="16" fill="#fff"/><circle cx="1195" cy="553" r="15" fill="#4eafcf"/><text x="1224" y="560" fill="#213f58" font-size="21">Bluetooth</text>
+ <rect x="1163" y="605" width="271" height="72" rx="16" fill="#fff"/><circle cx="1195" cy="641" r="15" fill="#67b497"/><text x="1224" y="648" fill="#213f58" font-size="21">Your apps</text>
+ <path d="M1334 638L1334 687L1347 675L1359 696L1371 689L1358 668L1376 666Z" fill="#0e2338" stroke="#fff" stroke-width="2"/>
+ <rect x="1180" y="726" width="237" height="60" rx="16" fill="#d4e8e5"/><text x="1298" y="752" text-anchor="middle" fill="#235649" font-size="18" font-weight="bold">BLE HID MOUSE</text><text x="1298" y="775" text-anchor="middle" fill="#235649" font-size="16">Relative move · click · scroll</text>
+ <path d="M1102 440H713" stroke="#61c5ff" stroke-width="5" fill="none" marker-end="url(#ab)"/>
+ <text x="909" y="340" text-anchor="middle" fill="#83d5ff" font-size="25" font-weight="bold">1. OBSERVE</text>
+ <text x="909" y="377" text-anchor="middle" fill="#c3dce9" font-size="21">USB · read-only ADB</text>
+ <text x="909" y="410" text-anchor="middle" fill="#96bed6" font-size="18">Screenshot → model</text>
+ <rect x="785" y="575" width="236" height="191" rx="23" fill="#193c37" stroke="#82e7bc" stroke-width="2"/>
+ <rect x="806" y="597" width="194" height="147" rx="12" fill="#122a2a"/>
+ <rect x="867" y="613" width="72" height="56" rx="6" fill="#8da8ac"/>
+ <path d="M822 615V721M984 615V721" stroke="#7dc4a5" stroke-width="6" stroke-dasharray="5 10"/>
+ <text x="903" y="703" text-anchor="middle" fill="#c5ffe7" font-size="24" font-weight="bold">ESP32-S3</text>
+ <text x="903" y="732" text-anchor="middle" fill="#a4cabb" font-size="16">UART → Bluetooth HID</text>
+ <path d="M704 649H766" stroke="#83f2c3" stroke-width="4" marker-end="url(#ag)"/>
+ <text x="738" y="610" text-anchor="middle" fill="#b6e7d2" font-size="17">USB</text>
+ <path d="M1037 677H1100" stroke="#83f2c3" stroke-width="4" marker-end="url(#ag)"/>
+ <text x="1068" y="633" text-anchor="middle" fill="#b6e7d2" font-size="17">BLE</text>
+ <text x="905" y="821" text-anchor="middle" fill="#90efc6" font-size="24" font-weight="bold">2. DECIDE → 3. MOVE / CLICK</text>
+ <line x1="70" y1="896" x2="1530" y2="896" stroke="#35526a"/>
+ <text x="73" y="940" fill="#edf7ff" font-size="23" font-weight="bold">Read-only ADB by default</text><text x="585" y="940" fill="#edf7ff" font-size="23" font-weight="bold">No phone App required</text><text x="1090" y="940" fill="#edf7ff" font-size="23" font-weight="bold">Relative BLE control</text>
+ <text x="73" y="982" fill="#a8bfd2" font-size="19">Optional Accessibility mode requires separate authorization. Diagram is conceptual, not a live screen capture.</text>
+</g></svg>

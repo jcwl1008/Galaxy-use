@@ -1,0 +1,8 @@
+{
+  "port": "COM4",
+  "adb": "C:\\path\\to\\platform-tools\\adb.exe",
+  "device_serial": "",
+  "adb_actions": false,
+  "adb_read_only": true,
+  "ui_backend": "auto"
+}

@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.py[cod]
+bridge.json
+opencode.json
+opencode.backup-*.json
+.env
+.env.*
+*.keystore
+*.jks
+*.idsig
+*factory*backup*.bin
+screenshots/
+logs/
+android/.gradle/
+android/build/
+android/local.properties

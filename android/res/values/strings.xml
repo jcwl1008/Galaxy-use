@@ -1,0 +1,1 @@
+<resources><string name="service_description">讓你電腦上的 OpenCode 讀取目前畫面文字及按鈕，並按指令點擊。內容會交予你選用的 AI 模型。透過已授權的 USB 偵錯連線使用；可隨時在 App 暫停或在此停用。密碼欄位不會讀取。Allows your paired computer to read UI elements and click them.</string></resources>

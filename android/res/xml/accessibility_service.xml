@@ -1,0 +1,5 @@
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+ android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged|typeViewScrolled|typeViewTextChanged|typeViewSelected|typeViewFocused|typeWindowsChanged"
+ android:accessibilityFeedbackType="feedbackGeneric" android:notificationTimeout="50"
+ android:accessibilityFlags="flagReportViewIds|flagRetrieveInteractiveWindows|flagIncludeNotImportantViews"
+ android:canRetrieveWindowContent="true" android:description="@string/service_description" android:settingsActivity="hk.jimmy.galaxybridge.MainActivity"/>
