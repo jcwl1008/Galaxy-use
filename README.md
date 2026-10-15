@@ -5,7 +5,7 @@
 **讓 AI 使用你真正的 Galaxy 手機。讀取畫面，再以藍牙滑鼠操作。**  
 **Computer-use-style control for your real Galaxy phone. Screenshots in. Bluetooth actions out.**
 
-![Galaxy Use: screenshots travel from Android to OpenCode through read-only ADB; mouse commands travel from the PC through ESP32-S3 to the phone over Bluetooth.](docs/images/how-it-works.png)
+![Galaxy Use: screenshots travel from Android to OpenCode through read-only ADB; mouse commands travel from the PC through ESP32-S3 to the phone over Bluetooth.](docs/images/galaxy-use-workflow.png)
 
 **Beta · Windows 10/11 · Android · ESP32-S3 · OpenCode · OpenRouter or a compatible local model**
 
